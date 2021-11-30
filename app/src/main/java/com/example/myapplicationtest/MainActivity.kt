@@ -3,13 +3,16 @@ package com.example.myapplicationtest
 import android.app.Person
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplicationtest.CustomInterface.Callll
 import com.example.myapplicationtest.SealedClassDescription.Colure
 import com.example.myapplicationtest.SealedClassDescription.Shape
 import com.example.myapplicationtest.dataclass.PersonUser
+import com.example.myapplicationtest.delegateexample.ModifyArraylist
 import com.example.myapplicationtest.generic.*
+import com.example.myapplicationtest.objectPackeOrSingleTone.Singletone
 import com.example.myapplicationtest.util.Connection
 import com.example.myapplicationtest.util.Host
 import com.example.myapplicationtest.util.SingleIndPredicate
@@ -26,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        var tvext = findViewById<TextView>(R.id.tv)
 
         // call back funcion implement
         mainFunciotn(45){result: Int ->
@@ -108,12 +112,49 @@ class MainActivity : AppCompatActivity() {
         var production2: ProduceInterface<Burger> = FastFoodStore()
         var production3: ProduceInterface<Burger> = BurgerStore()*/
 
-        Log.d("TAG","InnerClass "+Taka(5.0).getTaka().toString()+   box.value+"  "+ tox.value+"  "+ fox.value)
+
+
+        //single tone or  object
+        val helloworld = object {
+            val hellow = "hellow"
+            val world = "world"
+            var count = 0
+
+
+            override fun toString(): String {
+                count +=1
+                Log.d("TAG","Object "+"$hellow  $world $count")
+                return  "ta]"
+            }
+        }
+
+
+
+
+        tvext.setOnClickListener {
+            helloworld.toString()
+            Singletone.count()
+
+        }
+
+        // using delegation modify array list remove method
+
+         var list = ArrayList<String>()
+        list.add("dal")
+        list.add("kal")
+        list.add("chal")
+
+        val modifyArraylist = ModifyArraylist<String>(list)
+        modifyArraylist.remove("dal")
+
+        Log.d("TAG","delegate  "+list.size.toString()+" "+modifyArraylist.recover())
+
+
     }
 
 
 
-//callback function
+    //callback function
     fun mainFunciotn(a:Int, myCallbach: (result: Int) -> Unit){
         Log.d("TAG","Main function "+a.toString())
          myCallbach.invoke(455)
