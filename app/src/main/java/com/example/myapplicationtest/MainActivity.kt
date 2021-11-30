@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        //single tone or  object
+        //singletone or  object for more  https://medium.com/androiddevelopers/the-one-and-only-object-5dfd2cf7ab9b
         val helloworld = object {
             val hellow = "hellow"
             val world = "world"
@@ -137,7 +137,10 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        // using delegation modify array list remove method
+        // using delegation modify the system array list remove
+        // method , delegation is alternative of inheritance you use property and class deligation
+        // more link is https://medium.com/androiddevelopers/delegating-delegates-to-kotlin-ee0a0b21c52b
+
 
          var list = ArrayList<String>()
         list.add("dal")
