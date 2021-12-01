@@ -17,6 +17,7 @@ import com.example.myapplicationtest.util.Connection
 import com.example.myapplicationtest.util.Host
 import com.example.myapplicationtest.util.SingleIndPredicate
 import kotlin.math.sqrt
+import kotlin.reflect.KProperty
 
 class MainActivity : AppCompatActivity() {
     var singleAbsInteface = object : SingleIndPredicate {
@@ -26,17 +27,25 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+    val lazyValue: String by lazy {
+        println("computed!")
+        "Hello858"
+    }
+
+    private val valuee:String by lazyValue
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var tvext = findViewById<TextView>(R.id.tv)
-
+        Log.d("TAG","delegate === "+valuee.toString())
         // call back funcion implement
         mainFunciotn(45){result: Int ->
 
             Log.d("TAG","Second function uyu "+result.toString())
 
         }
+
 
         // example of lamda interface , here calll is interface of CustomInterface
         // class and we implement this lamda expression
@@ -153,6 +162,9 @@ class MainActivity : AppCompatActivity() {
         Log.d("TAG","delegate  "+list.size.toString()+" "+modifyArraylist.recover())
 
 
+
+
+
     }
 
 
@@ -186,4 +198,8 @@ class MainActivity : AppCompatActivity() {
         inline fun getTaka(): Float = price * 71.62f
     }
 
+    private operator fun String.getValue(thisRef: Any?, property: KProperty<*>): String = lazyValue
+
 }
+
+
